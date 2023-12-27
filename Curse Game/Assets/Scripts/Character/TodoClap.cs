@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class TodoClap : MonoBehaviour
 {
+    // Reference player controller
     ThirdPersonController thirdPersonController;
     public GameObject player;
-    public GameObject Target;
+    public GameObject target;
 
-    public Vector3 playerTempPosition;
-    public Vector3 targetTempPosition;
+    public Vector3 tempPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -29,18 +29,17 @@ public class TodoClap : MonoBehaviour
 
     public void Swap()
     {
-        playerTempPosition = player.transform.position;
-        targetTempPosition = Target.transform.position;
-        player.transform.position = targetTempPosition;
-        Target.transform.position = playerTempPosition;
+        tempPosition = player.transform.position;
+        player.transform.position = target.transform.position;
+        target.transform.position = tempPosition;
     }
 
     IEnumerator Teleport()
     {
         thirdPersonController.disabled = true;
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.1f);
         Swap();
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.1f);
         thirdPersonController.disabled = false;
     }
 }
